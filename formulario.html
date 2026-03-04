@@ -63,13 +63,30 @@
                 return;
             }
 
+            //Validar edad
+            let fechaNacimiento = new Date(fecha);
+            let hoy = new Date();
+
+            let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            let mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+            }
+
+            if (edad < 18) {
+                alert("Debes ser mayor de edad (mínimo 18 años)...");
+                return;
+            }
+
+            //Validar correo
             let formatoCorreo = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
             if (!formatoCorreo.test(correo)) {
                 alert("El formato del correo electrónico no es válido...");
                 return;
             }
-            
+
             if (password !== repetirPassword) {
                 alert("Las contraseñas no coinciden...");
                 return;
