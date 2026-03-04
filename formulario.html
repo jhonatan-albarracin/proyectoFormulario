@@ -1,48 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Formulario Crear Cuenta</title>
-    <script>
-
-    </script>
 </head>
+
 <body>
     <article>
-        <section>
-            <h1>Crea una Nueva Cuenta</h1>
-        </section>
-        <section>
-            <h2>
-                Nombre
-            </h2>
-            <input id="nombre" type="text">
-            <h2>
-                Apellido
-            </h2>
-            <input id="apellido" type="text">
-            <h2>
-                (Segundo Apellido)
-            </h2>
-            <input id="segundo-apellido" type="text">
-        </section>
-        <section>
-            <h2>Fecha de nacimiento</h2>
-            <input type="date">
-        </section>
-        <section>
-            <h2>Correo Electronico</h2>
-            <input type="email">
-        </section>
-        <section>
-            <h2>Nueva Contraseña</h2>
-            <input type="password">
-            <h2>Repite la Contraseña</h2>
-            <input type="password">
-        </section>
-        <section>
-            <button>Crear cuenta</button>
-        </section>
+        <form id="formulario">
+            <section>
+                <h1>Crea una Nueva Cuenta</h1>
+            </section>
+            <section>
+                <h2>
+                    Nombre
+                </h2>
+                <input id="nombre" type="text">
+                <h2>
+                    Apellido
+                </h2>
+                <input id="apellido" type="text">
+                <h2>
+                    (Segundo Apellido)
+                </h2>
+                <input id="segundo-apellido" type="text">
+            </section>
+            <section>
+                <h2>Fecha de nacimiento</h2>
+                <input id="fecha" type="date">
+            </section>
+            <section>
+                <h2>Correo Electronico</h2>
+                <input id="correo" type="email">
+            </section>
+            <section>
+                <h2>Nueva Contraseña</h2>
+                <input id="password" type="password">
+                <h2>Repite la Contraseña</h2>
+                <input id="repetir-password" type="password">
+            </section>
+            <section>
+                <button type="submit">Crear cuenta</button>
+            </section>
+        </form>
     </article>
+    <script>
+        formulario = document.getElementById("formulario");
+
+        formulario.addEventListener("submit", function (e) {
+            e.preventDefault();
+            nombre = document.getElementById("nombre").value.trim();
+            apellido = document.getElementById("apellido").value.trim();
+            segundoApellido = document.getElementById("segundo-apellido").value.trim();
+            fecha = document.getElementById("fecha").value;
+            correo = document.getElementById("correo").value.trim();
+            password = document.getElementById("password").value.trim();
+            repetirPassword = document.getElementById("repetir-password").value.trim();
+
+            if (!nombre || !apellido || !fecha || !correo || !password || !repetirPassword) {
+                alert("Todos los campos son obligatorios...");
+                return;
+            }
+
+            if (password !== repetirPassword) {
+                alert("Las contraseñas no coinciden...");
+                return;
+            }
+
+            alert("Formulario enviado correctamente...");
+            formulario.submit();
+        });
+    </script>
 </body>
+
 </html>
