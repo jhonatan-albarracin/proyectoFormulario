@@ -13,17 +13,11 @@
                 <h1>Crea una Nueva Cuenta</h1>
             </section>
             <section>
-                <h2>
-                    Nombre
-                </h2>
+                <h2>Nombre</h2>
                 <input id="nombre" type="text">
-                <h2>
-                    Apellido
-                </h2>
+                <h2>Apellido</h2>
                 <input id="apellido" type="text">
-                <h2>
-                    (Segundo Apellido)
-                </h2>
+                <h2>(Segundo Apellido)</h2>
                 <input id="segundo-apellido" type="text">
             </section>
             <section>
@@ -31,7 +25,7 @@
                 <input id="fecha" type="date">
             </section>
             <section>
-                <h2>Correo Electronico</h2>
+                <h2>Correo Electrónico</h2>
                 <input id="correo" type="email">
             </section>
             <section>
@@ -45,57 +39,91 @@
             </section>
         </form>
     </article>
+
     <script>
-        formulario = document.getElementById("formulario");
+        const formulario = document.getElementById("formulario");
 
-        formulario.addEventListener("submit", function validar(e) {
-            e.preventDefault();
-            nombre = document.getElementById("nombre").value.trim();
-            apellido = document.getElementById("apellido").value.trim();
-            segundoApellido = document.getElementById("segundo-apellido").value.trim();
-            fecha = document.getElementById("fecha").value;
-            correo = document.getElementById("correo").value.trim();
-            password = document.getElementById("password").value.trim();
-            repetirPassword = document.getElementById("repetir-password").value.trim();
+        // Función para validar campos obligatorios
+        function validarCamposObligatorios(campos) {
+            for (const campo in campos) {
+                if (!campos[campo]) {
+                    alert("Todos los campos son obligatorios...");
+                    return false;
+                }
+            }
+            return true;
+        }
 
-            if (!nombre || !apellido || !fecha || !correo || !password || !repetirPassword) {
-                alert("Todos los campos son obligatorios...");
-                return;
+        // Función para validar fecha de nacimiento
+        function validarFechaNacimiento(fecha) {
+            const fechaNacimiento = new Date(fecha);
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+
+            if (fechaNacimiento > hoy) {
+                alert("La fecha de nacimiento no puede ser futura...");
+                return false;
             }
 
-            //Validar edad
-            let fechaNacimiento = new Date(fecha);
-            let hoy = new Date();
-
             let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-            let mes = hoy.getMonth() - fechaNacimiento.getMonth();
-
+            const mes = hoy.getMonth() - fechaNacimiento.getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
                 edad--;
             }
 
             if (edad < 18) {
                 alert("Debes ser mayor de edad (mínimo 18 años)...");
-                return;
+                return false;
             }
 
-            //Validar correo
-            let formatoCorreo = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+            return true;
+        }
 
+        // Función para validar correo
+        function validarCorreo(correo) {
+            const formatoCorreo = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
             if (!formatoCorreo.test(correo)) {
                 alert("El formato del correo electrónico no es válido...");
-                return;
+                return false;
             }
+            return true;
+        }
 
+        // Función para validar contraseña
+        function validarContraseña(password, repetirPassword) {
+            if (password.length < 8) {
+                alert("La contraseña debe tener al menos 8 caracteres...");
+                return false;
+            }
             if (password !== repetirPassword) {
                 alert("Las contraseñas no coinciden...");
-                return;
+                return false;
             }
+            return true;
+        }
+
+        // Evento submit
+        formulario.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById("nombre").value.trim();
+            const apellido = document.getElementById("apellido").value.trim();
+            const segundoApellido = document.getElementById("segundo-apellido").value.trim();
+            const fecha = document.getElementById("fecha").value;
+            const correo = document.getElementById("correo").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const repetirPassword = document.getElementById("repetir-password").value.trim();
+
+            const campos = { nombre, apellido, fecha, correo, password, repetirPassword };
+
+            if (!validarCamposObligatorios(campos)) return;
+            if (!validarFechaNacimiento(fecha)) return;
+            if (!validarCorreo(correo)) return;
+            if (!validarContraseña(password, repetirPassword)) return;
 
             alert("Formulario enviado correctamente...");
             formulario.submit();
         });
     </script>
 </body>
-
 </html>
