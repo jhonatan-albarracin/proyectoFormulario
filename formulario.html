@@ -48,7 +48,7 @@
     <script>
         formulario = document.getElementById("formulario");
 
-        formulario.addEventListener("submit", function (e) {
+        formulario.addEventListener("submit", function validar(e) {
             e.preventDefault();
             nombre = document.getElementById("nombre").value.trim();
             apellido = document.getElementById("apellido").value.trim();
@@ -63,6 +63,13 @@
                 return;
             }
 
+            let formatoCorreo = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+            if (!formatoCorreo.test(correo)) {
+                alert("El formato del correo electrónico no es válido...");
+                return;
+            }
+            
             if (password !== repetirPassword) {
                 alert("Las contraseñas no coinciden...");
                 return;
