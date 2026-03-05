@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Formulario Crear Cuenta</title>
 </head>
 
@@ -13,8 +14,7 @@
             <div class="lado-izquierdo">
                 <div class="portada">
                     <img src="img/cruz-de-asturias.svg">
-                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-                    <h1>Bienvenido</h1>
+                    <h1>Bienvenido</h>
                 </div>
             </div>
             <div class="lado-derecho">
@@ -60,11 +60,11 @@
         // Función para validar campos obligatorios
         function validarCamposObligatorios(campos) {
             for (const campo in campos) {
-                if(!campos.nombre){
-                    document.getElementById("error-nombre").innerHTML = "<h4>Introdusca un Nombre</h4>";
+                if (!campos.nombre) {
+                    document.getElementById("error-nombre").innerHTML = '<span class="error">⚠ El nombre es obligatorio.</span>';
                 }
                 if (!campos[campo]) {
-                    
+
                     alert("Todos los campos son obligatorios...");
                     return false;
                 }
@@ -144,4 +144,5 @@
         });
     </script>
 </body>
+
 </html>
