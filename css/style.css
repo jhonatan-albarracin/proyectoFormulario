@@ -3,29 +3,29 @@
 .datos{
     display:flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .credenciales{
     display:flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 input {
-    padding: 12px;
-    border: 1px solid #e0e0e0;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
 }
+
 input:focus {
     outline: none;
-    border-color: #480c0c;
-    box-shadow: 0 0 0 3px #480c0c;
+    border-color: #7a0c0c;
+    box-shadow: 0 0 0 3px rgba(122,12,12,0.15);
 }
 
 .error{
-    color:#7a0f0f; /*vino oscuro*/
-    font-size: 1rem;
-    background-color: #ffd6d6;
+    color:#7a0f0f;
+    font-size: 0.9rem;
     margin-top: 4px;
 }
 
@@ -37,7 +37,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #e0e0e0;
+    background-color: white;
 }
 
 .contenedor {
@@ -46,16 +46,15 @@ body {
 
 .card {
     display: flex;
-    background: white;
     border-radius: 15px;
     border: 2px solid #480c0c;
     overflow: hidden;
-    box-shadow: 0 15px 40px darkgray;
+    box-shadow: 0 15px 40px white;
 }
 .lado-izquierdo {
     width: 40%;
     background: linear-gradient(160deg, #8a2121, #480c0c);
-    color: white;
+    color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,17 +71,21 @@ body {
 .lado-derecho {
     width: 60%;
     padding: 40px;
+    background-color: white;
 }
 
 button {
-    background-color: #591e1e;;
+    background-color: #480c0c;;
     margin-top: 15px;
     padding: 14px;
     font-size: large;
-    color: #ffffff;
+    color: white;
     border-radius: 15px;
     margin-bottom: 20px;
     font-family: 'Inter', sans-serif;
+}
+button:hover {
+  background: #8c0f0f;
 }
 
 #formulario section h1{
