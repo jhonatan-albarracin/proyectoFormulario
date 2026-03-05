@@ -1,0 +1,82 @@
+
+
+.datos{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.credenciales{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+input:focus {
+    outline: none;
+    border-color: #2e8bc0;
+    box-shadow: 0 0 0 3px rgba(46,139,192,0.15);
+}
+
+.error{
+    color:#e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.5;
+    min-height: 18px;
+}
+
+body {
+    margin: 0;  
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1e3d59, #2e8bc0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.contenedor {
+    width: 900px;
+}
+
+.card {
+    display: flex;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+.lado-izquierdo {
+    width: 40%;
+    background: linear-gradient(160deg, #2e8bc0, #0c2d48);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.lado-izquierdo img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
+
+/* Lado derecho (formulario) */
+.lado-derecho {
+    width: 60%;
+    padding: 40px;
+    background: #ffffff;
+}
+
+button {
+    margin-top: 15px;
+    padding: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+}

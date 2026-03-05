@@ -3,41 +3,55 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
     <title>Formulario Crear Cuenta</title>
 </head>
 
 <body>
-    <article>
-        <form id="formulario">
-            <section>
-                <h1>Crea una Nueva Cuenta</h1>
-            </section>
-            <section>
-                <h2>Nombre</h2>
-                <input id="nombre" type="text">
-                <h2>Apellido</h2>
-                <input id="apellido" type="text">
-                <h2>(Segundo Apellido)</h2>
-                <input id="segundo-apellido" type="text">
-            </section>
-            <section>
-                <h2>Fecha de nacimiento</h2>
-                <input id="fecha" type="date">
-            </section>
-            <section>
-                <h2>Correo Electrónico</h2>
-                <input id="correo" type="email">
-            </section>
-            <section>
-                <h2>Nueva Contraseña</h2>
-                <input id="password" type="password">
-                <h2>Repite la Contraseña</h2>
-                <input id="repetir-password" type="password">
-            </section>
-            <section>
-                <button type="submit">Crear cuenta</button>
-            </section>
-        </form>
+    <article class="contenedor">
+        <div class="card">
+            <div class="lado-izquierdo">
+                <div class="portada">
+                    <img src="img/cruz-de-asturias.svg">
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+                    <h1>Bienvenido</h1>
+                </div>
+            </div>
+            <div class="lado-derecho">
+                <form id="formulario">
+                    <section>
+                        <h1>Crea una Nueva Cuenta</h1>
+                    </section>
+                    <section class="datos">
+                        <h2>Nombre</h2>
+                        <input id="nombre" type="text">
+                        <span id="error-nombre" class="error"></span>
+                        <h2>Apellido</h2>
+                        <input id="apellido" type="text">
+                        <span id="error-apellido" class="error"></span>
+                        <h2>(Segundo Apellido)</h2>
+                        <input id="segundo-apellido" type="text">
+                        <h2>Fecha de nacimiento</h2>
+                        <input id="fecha" type="date">
+                        <span id="error-fecha" class="error"></span>
+                    </section>
+                    <section class="credenciales">
+                        <h2>Correo Electrónico</h2>
+                        <input id="correo" type="email">
+                        <span id="error-correo" class="error"></span>
+                        <h2>Nueva Contraseña</h2>
+                        <input id="password" type="password">
+                        <span id="error-password" class="error"></span>
+                        <h2>Repite la Contraseña</h2>
+                        <input id="repetir-password" type="password">
+                        <span id="error-repetir-password"></span>
+                    </section>
+                    <section>
+                        <button type="submit">Crear cuenta</button>
+                    </section>
+                </form>
+            </div>
+        </div>
     </article>
 
     <script>
@@ -46,7 +60,11 @@
         // Función para validar campos obligatorios
         function validarCamposObligatorios(campos) {
             for (const campo in campos) {
+                if(!campos.nombre){
+                    document.getElementById("error-nombre").innerHTML = "<h4>Introdusca un Nombre</h4>";
+                }
                 if (!campos[campo]) {
+                    
                     alert("Todos los campos son obligatorios...");
                     return false;
                 }
