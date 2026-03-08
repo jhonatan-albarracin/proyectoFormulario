@@ -1,44 +1,21 @@
-
-
-.datos{
-    display:flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-.credenciales{
-    display:flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-input {
-    padding: 12px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-}
-
-input:focus {
-    outline: none;
-    border-color: #7a0c0c;
-    box-shadow: 0 0 0 3px rgba(122,12,12,0.15);
-}
-
-.error{
-    color:#7a0f0f;
-    font-size: 0.9rem;
-    margin-top: 4px;
-}
+/* ESTILOS GENERALES */
 
 body {
     margin: 0;  
     font-family: 'Inter', sans-serif;
-    /*background: linear-gradient(135deg, #632121, #7a1c1c);*/
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: white;
 }
+
+/* Fondo cuando la cuenta se crea */
+body.cuenta-creada{
+    background-color: lightgreen;
+}
+
+/* CONTENEDOR PRINCIPAL */
 
 .contenedor {
     width: 900px;
@@ -51,6 +28,9 @@ body {
     overflow: hidden;
     box-shadow: 0 15px 40px white;
 }
+
+/* LADO IZQUIERDO */
+
 .lado-izquierdo {
     width: 40%;
     background: linear-gradient(160deg, #8a2121, #480c0c);
@@ -67,15 +47,54 @@ body {
     height: 50%;
 }
 
-/* Lado derecho (formulario) */
+/* LADO DERECHO */
+
 .lado-derecho {
     width: 60%;
     padding: 40px;
     background-color: white;
 }
 
+/* FORMULARIO */
+
+.datos{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.credenciales{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#formulario section h1{
+    color:#591e1e;
+}
+
+#formulario section h2{
+    color:#591e1e;
+}
+
+/* INPUTS */
+
+input {
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #7a0c0c;
+    box-shadow: 0 0 0 3px rgba(122,12,12,0.15);
+}
+
+/* BOTÓN */
+
 button {
-    background-color: #480c0c;;
+    background-color: #480c0c;
     margin-top: 15px;
     padding: 14px;
     font-size: large;
@@ -84,13 +103,15 @@ button {
     margin-bottom: 20px;
     font-family: 'Inter', sans-serif;
 }
+
 button:hover {
-  background: #8c0f0f;
+    background: #8c0f0f;
 }
 
-#formulario section h1{
-    color:#591e1e;
-}
-#formulario section h2{
-    color:#591e1e;
+/* MENSAJES DE ERROR */
+
+.error{
+    color:#7a0f0f;
+    font-size: 0.9rem;
+    margin-top: 4px;
 }

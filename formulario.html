@@ -44,7 +44,7 @@
                         <span id="error-password" class="error"></span>
                         <h2>Repite la Contraseña</h2>
                         <input id="repetir-password" type="password">
-                        <span id="error-repetir-password"></span>
+                        <span id="error-repetir-password" class="error"></span>
                     </section>
                     <section>
                         <button type="submit">Crear cuenta</button>
@@ -55,78 +55,121 @@
     </article>
 
     <script>
+
         const formulario = document.getElementById("formulario");
 
-        // Función para validar campos obligatorios
-        function validarCamposObligatorios(campos) {
-            for (const campo in campos) {
-                if (!campos.nombre) {
-                    document.getElementById("error-nombre").innerHTML = '<span class="error">⚠ El nombre es obligatorio.</span>';
-                }
-                if (!campos[campo]) {
-
-                    alert("Todos los campos son obligatorios...");
-                    return false;
-                }
-            }
-            return true;
+        // Limpiar errores declarados
+        function limpiarErrores() {
+            document.getElementById("error-nombre").innerHTML = "";
+            document.getElementById("error-apellido").innerHTML = "";
+            document.getElementById("error-fecha").innerHTML = "";
+            document.getElementById("error-correo").innerHTML = "";
+            document.getElementById("error-password").innerHTML = "";
+            document.getElementById("error-repetir-password").innerHTML = "";
         }
 
-        // Función para validar fecha de nacimiento
+        // Campos obligatorios
+        function validarCamposObligatorios(campos) {
+            let valido = true;
+
+            if (!campos.nombre) {
+                document.getElementById("error-nombre").innerHTML = "⚠ El nombre es obligatorio.";
+                valido = false;
+            }
+
+            if (!campos.apellido) {
+                document.getElementById("error-apellido").innerHTML = "⚠ El apellido es obligatorio.";
+                valido = false;
+            }
+
+            if (!campos.fecha) {
+                document.getElementById("error-fecha").innerHTML = "⚠ La fecha de nacimiento es obligatoria.";
+                valido = false;
+            }
+
+            if (!campos.correo) {
+                document.getElementById("error-correo").innerHTML = "⚠ El correo es obligatorio.";
+                valido = false;
+            }
+
+            if (!campos.password) {
+                document.getElementById("error-password").innerHTML = "⚠ La contraseña es obligatoria.";
+                valido = false;
+            }
+
+            if (!campos.repetirPassword) {
+                document.getElementById("error-repetir-password").innerHTML = "⚠ Debes repetir la contraseña.";
+                valido = false;
+            }
+
+            return valido;
+        }
+
+        // Fecha
         function validarFechaNacimiento(fecha) {
             const fechaNacimiento = new Date(fecha);
             const hoy = new Date();
-            hoy.setHours(0, 0, 0, 0);
 
             if (fechaNacimiento > hoy) {
-                alert("La fecha de nacimiento no puede ser futura...");
+                document.getElementById("error-fecha").innerHTML = "⚠ La fecha no puede ser futura.";
                 return false;
             }
 
             let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
             const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
             if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
                 edad--;
             }
 
             if (edad < 18) {
-                alert("Debes ser mayor de edad (mínimo 18 años)...");
+                document.getElementById("error-fecha").innerHTML = "⚠ Debes tener mínimo 18 años.";
                 return false;
             }
 
             return true;
         }
 
-        // Función para validar correo
+        // Correo
         function validarCorreo(correo) {
-            const formatoCorreo = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-            if (!formatoCorreo.test(correo)) {
-                alert("El formato del correo electrónico no es válido...");
+            const expresion = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+            if (!expresion.test(correo)) {
+                document.getElementById("error-correo").innerHTML = "⚠ Correo no válido.";
                 return false;
             }
+
             return true;
         }
 
-        // Función para validar contraseña
-        function validarContraseña(password, repetirPassword) {
+        // Contraseña
+        function validarPassword(password) {
             if (password.length < 8) {
-                alert("La contraseña debe tener al menos 8 caracteres...");
+                document.getElementById("error-password").innerHTML = "⚠ Debe tener mínimo 8 caracteres.";
                 return false;
             }
-            if (password !== repetirPassword) {
-                alert("Las contraseñas no coinciden...");
-                return false;
-            }
+
             return true;
         }
 
-        // Evento submit
+        // Coincidencia de contraseñas
+        function validarRepetirPassword(password, repetirPassword) {
+            if (password !== repetirPassword) {
+                document.getElementById("error-repetir-password").innerHTML = "⚠ Las contraseñas no coinciden.";
+                return false;
+            }
+
+            return true;
+        }
+
+        // Formulario
         formulario.addEventListener("submit", function (e) {
+
             e.preventDefault();
+            limpiarErrores();
 
             const nombre = document.getElementById("nombre").value.trim();
             const apellido = document.getElementById("apellido").value.trim();
-            const segundoApellido = document.getElementById("segundo-apellido").value.trim();
             const fecha = document.getElementById("fecha").value;
             const correo = document.getElementById("correo").value.trim();
             const password = document.getElementById("password").value.trim();
@@ -134,14 +177,30 @@
 
             const campos = { nombre, apellido, fecha, correo, password, repetirPassword };
 
-            if (!validarCamposObligatorios(campos)) return;
-            if (!validarFechaNacimiento(fecha)) return;
-            if (!validarCorreo(correo)) return;
-            if (!validarContraseña(password, repetirPassword)) return;
+            let formularioValido = true;
 
-            alert("Formulario enviado correctamente...");
-            formulario.submit();
+            if (!validarCamposObligatorios(campos)) formularioValido = false;
+            if (fecha && !validarFechaNacimiento(fecha)) formularioValido = false;
+            if (correo && !validarCorreo(correo)) formularioValido = false;
+            if (password && !validarPassword(password)) formularioValido = false;
+            if (password && repetirPassword && !validarRepetirPassword(password, repetirPassword)) formularioValido = false;
+
+            if (formularioValido) {
+                alert("Se ha creado correctamente la cuenta de " + nombre + " " + apellido);
+                document.body.style.backgroundColor = "lightgreen";
+            }
+
+            /*
+                if (formularioValido) {
+                    alert("¡Formulario creado con éxito!");
+                    formulario.submit();
+                }
+                */
+
+            // SE OMITIO EL SUBMIT DEL BOTON PARA PINTAR LA PAGINA DE VERDE
+
         });
+
     </script>
 </body>
 
