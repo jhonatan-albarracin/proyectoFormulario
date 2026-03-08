@@ -9,12 +9,14 @@
 </head>
 
 <body>
+    
     <article class="contenedor">
+        <button type="button" onclick="botonVolver()">Volver</button>
         <div class="card">
             <div class="lado-izquierdo">
                 <div class="portada">
                     <img src="img/cruz-de-asturias.svg">
-                    <h1>Bienvenido</h>
+                    <h1>Bienvenido</h1>
                 </div>
             </div>
             <div class="lado-derecho">
@@ -55,6 +57,10 @@
     </article>
 
     <script>
+        // Boton para volver
+        function botonVolver(){
+            window.location.href="";
+        }
 
         const formulario = document.getElementById("formulario");
 
@@ -186,7 +192,7 @@
             if (password && repetirPassword && !validarRepetirPassword(password, repetirPassword)) formularioValido = false;
 
             if (formularioValido) {
-                alert("Se ha creado correctamente la cuenta de " + nombre + " " + apellido);
+                alert("¡Se ha creado correctamente la cuenta de " + nombre + " " + apellido + "!");
                 document.body.style.backgroundColor = "lightgreen";
             }
 
